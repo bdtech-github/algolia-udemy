@@ -15,17 +15,8 @@ const pgClient = new Client({ database: 'postgres' })
 const index = algoliaClient.initIndex("dev_TESTING")
 
 const saveOne = async () => {  
-  const people = [
-    {
-      name: 'Omar',
-      email: 'omar@mail.com'
-    },
-    {
-      name: 'Claudia',
-      email: 'claudia@mail.com'
-    }
-  ]
-  const result = await index.saveObject(people[1], { autoGenerateObjectIDIfNotExist: true })
+  const employee = {"id":2,"firstName":"Rhoda","lastName":"Trevarthen","email":"rtrevarthen1@google.co.jp","gender":"Male","ipAddress":"130.62.87.233","company":"Tagfeed","salaryCurrency":"BRL","salary":9908.96}
+  const result = await index.saveObject(employee, { autoGenerateObjectIDIfNotExist: true })
   console.log(result)  
 }
 
