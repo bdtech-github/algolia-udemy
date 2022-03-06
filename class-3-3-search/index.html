@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <title></title>
+        <meta charset="UTF-8" />
+        <!-- for the search only version -->
+        <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.5.1/dist/algoliasearch-lite.umd.js"></script>
+    </head>
+
+    <body>
+        <div id="app"></div>
+        <script>
+            const app = document.getElementById('app')
+            const client = algoliasearch('', '')
+            const index = client.initIndex('dev_TESTING')
+
+            index.search('Ad').then(result => {                
+                const hits = result.hits.map(hit => `<p>${hit._highlightResult.name.value.replaceAll('em', 'mark')}</p>`)
+                app.innerHTML = hits.join('')
+            })
+        </script>
+    </body>
+</html>
