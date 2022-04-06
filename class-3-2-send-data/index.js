@@ -3,12 +3,12 @@ const _ = require('lodash')
 const algoliasearch = require("algoliasearch")
 const { Client } = require('pg')
 
-const REACT_APP_ALGOLIA_API_KEY = process.env.REACT_APP_ALGOLIA_API_KEY
-const REACT_APP_ALOGLIA_APP_ID = process.env.REACT_APP_ALOGLIA_APP_ID
+const ALGOLIA_APP_ID = process.env.ALGOLIA_APP_ID
+const ALGOLIA_APP_KEY = process.env.ALGOLIA_APP_KEY
 
 const algoliaClient = algoliasearch(
-  REACT_APP_ALOGLIA_APP_ID,
-  REACT_APP_ALGOLIA_API_KEY
+  ALGOLIA_APP_ID,
+  ALGOLIA_APP_KEY
 )
 const pgClient = new Client({ database: 'postgres' })
 
