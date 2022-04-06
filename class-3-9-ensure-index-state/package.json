@@ -1,0 +1,10 @@
+{
+  "name": "class-3-1-create-index",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "algoliasearch": "^4.12.2",
+    "dotenv": "^16.0.0"    
+  }
+}
