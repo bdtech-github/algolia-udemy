@@ -28,10 +28,6 @@ body {
     grid-template-columns: 1fr 1fr 1fr;
   }
   
-  .products-container li img {
-    width: 100%;
-  }
-  
   .results-container {
     display: grid;
     grid-template-columns: 0.5fr 2fr;
