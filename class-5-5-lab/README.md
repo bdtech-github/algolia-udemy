@@ -26,10 +26,10 @@ CREATE CHANGEFEED FOR vehicles INTO 'kafka://94fa-186-31-137-46.ngrok.io?topic_p
 UPDATE users SET address = 'new address' WHERE id = 'ae147ae1-47ae-4800-8000-000000000022';
 ```
 
-5n59x-peLh1Ke4nyWiXqqA
+4LZTOESESjHpJTJmij-UIg
 
-cockroach workload init movr "postgresql://algolia:5n59x-peLh1Ke4nyWiXqqA@free-tier14.aws-us-east-1.cockroachlabs.cloud:26257/movr?sslmode=verify-full&options=--cluster%3Dmobile-croaker-5730"
-cockroach sql --url "postgresql://algolia:5n59x-peLh1Ke4nyWiXqqA@free-tier14.aws-us-east-1.cockroachlabs.cloud:26257/movr?sslmode=verify-full&options=--cluster%3Dmobile-croaker-5730"
+cockroach workload init movr "postgresql://algolia:4LZTOESESjHpJTJmij-UIg@ecommerce-7ts.aws-us-east-1.cockroachlabs.cloud:26257/movr?sslmode=verify-full&sslrootcert=$HOME/Library/CockroachCloud/certs/ecommerce-ca.crt"
+cockroach sql --url "postgresql://algolia:4LZTOESESjHpJTJmij-UIg@ecommerce-7ts.aws-us-east-1.cockroachlabs.cloud:26257/movr?sslmode=verify-full&sslrootcert=$HOME/Library/CockroachCloud/certs/ecommerce-ca.crt"
 
 FXKI5C7OD5MDX2XF
 AQkYUDGY0zc39gWPLj8NxH2pcpENFmnq5K3BTBAoAUGVbLULzqw7g/sw/ddTb3T1
