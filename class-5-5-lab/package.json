@@ -1,7 +1,9 @@
 {
+  "node": "v16.14.2",
   "dependencies": {
     "algoliasearch": "^4.14.2",
     "kafkajs": "^2.2.0",
+    "lodash": "^4.17.21",
     "node-rdkafka": "^2.13.0"
   }
 }
