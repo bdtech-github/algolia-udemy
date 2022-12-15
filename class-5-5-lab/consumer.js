@@ -1,18 +1,19 @@
 const { Kafka } = require('kafkajs');
 const algoliasearch = require('algoliasearch');
-const { difference } = require('./util')
+const { difference } = require('./util');
+require('dotenv').config();
 
-const algoliaClient = algoliasearch('', '');
-const index = algoliaClient.initIndex('users');
+const algoliaClient = algoliasearch(process.env.ALGOLIA_APP_ID, process.env.ALGOLIA_API_KEY);
+const index = algoliaClient.initIndex(process.env.ALGOLIA_INDEX);
 
 const kafka = new Kafka({
-    brokers: [''],
+    brokers: [process.env.KAFKA_BROKER],
     ssl: true,
     logLevel: 2,
     sasl: {
         mechanism: 'plain',
-        username: '',
-        password:''
+        username: process.env.KAFKA_USERNAME,
+        password:process.env.KAFKA_PASSWORD
     }
 });
 const consumer = kafka.consumer({ groupId: 'default' });
@@ -22,7 +23,7 @@ const run = async () => {
     await consumer.connect();
 
     // SUSCRIBIRSE A UN TOPICO
-    await consumer.subscribe({ topic: '', fromBeginning: false });
+    await consumer.subscribe({ topic: process.env.KAFKA_TOPIC, fromBeginning: false });
 
     console.log('Consumer running...')
     // INICIAR EL CONSUMIDOR
@@ -51,7 +52,7 @@ const run = async () => {
                 const diff = difference(value.before, value.after);
                 console.log(diff)
                 const user = { objectID: value.after.id, ...diff, updateTime: new Date() };
-                result = await index.partialUpdateObject(user, { createIfNotExists: false });
+                result = await index.partialUpdateObject(user, { createIfNotExists: true });
             }
 
             console.log(result);

@@ -2,14 +2,27 @@
 
 ## Setup
 
+### Setup Confluence
+
+1. Create cluster
+2. Create topic
+3. Create API KEY
+
 ### Setup CockroachDB
 
-Create example database
+Install CockroachDB CLI, [instructions](https://github.com/cockroachdb/homebrew-tap):
 
 ```bash
-curl --create-dirs -o $HOME/Library/CockroachCloud/certs/algolia-test-ca.crt -O https://cockroachlabs.cloud/clusters/fae78cec-4529-48fb-ab03-4aff4f76f920/cert
-cockroach workload init movr "postgresql://algolia:<ENTER-PASSWORD>@algolia-test-gq7.gcp-us-east4.cockroachlabs.cloud:26257/movr?sslmode=verify-full&sslrootcert=$HOME/Library/CockroachCloud/certs/algolia-test-ca.crt"
-cockroach sql --url "postgresql://algolia:<ENTER-PASSWORD>@algolia-test-gq7.gcp-us-east4.cockroachlabs.cloud:26257/movr?sslmode=verify-full&sslrootcert=$HOME/Library/CockroachCloud/certs/algolia-test-ca.crt"
+brew tap cockroachdb/tap
+brew install cockroach
+brew install ccloud
+```
+
+Create example database
+icdvA1I0uL283LPj_klUUA
+```bash
+cockroach workload init movr "postgresql://user:icdvA1I0uL283LPj_klUUA@frigid-crane-7449.7tt.cockroachlabs.cloud:26257/movr?sslmode=verify-full"
+cockroach sql --url "postgresql://user:icdvA1I0uL283LPj_klUUA@frigid-crane-7449.7tt.cockroachlabs.cloud:26257/movr?sslmode=verify-full"
 ```
 
 Setup database ChangeFeed.
@@ -18,25 +31,27 @@ Setup database ChangeFeed.
 SHOW DATABASES;
 SHOW TABLES FROM movr;
 SELECT * FROM movr.users LIMIT 10;
-SET database = movr;
+SET database = movr;    
 SET CLUSTER SETTING kv.rangefeed.enabled = true;
-CREATE CHANGEFEED FOR vehicles INTO 'kafka://localhost:9092?topic_prefix=quickstart';
-CREATE CHANGEFEED FOR vehicles INTO 'kafka://94fa-186-31-137-46.ngrok.io?topic_prefix=quickstart';
+
+CREATE CHANGEFEED FOR TABLE users 
+INTO 'kafka://pkc-n00kk.us-east-1.aws.confluent.cloud:9092?topic_name=users&tls_enabled=true&sasl_enabled=true&sasl_user=6UQTPPCFNT7QL6MA&sasl_password=TzWdnaNO%2BUa4Qa8zD4%2FFmAN6ChPt70T03Y4dxtQV0JcNImhge7s%2B%2FBxLJja0gE0l&sasl_mechanism=PLAIN' 
+WITH updated, diff;
 
 UPDATE users SET address = 'new address' WHERE id = 'ae147ae1-47ae-4800-8000-000000000022';
 ```
 
-4LZTOESESjHpJTJmij-UIg
+API key:
+6UQTPPCFNT7QL6MA
 
-cockroach workload init movr "postgresql://algolia:4LZTOESESjHpJTJmij-UIg@ecommerce-7ts.aws-us-east-1.cockroachlabs.cloud:26257/movr?sslmode=verify-full&sslrootcert=$HOME/Library/CockroachCloud/certs/ecommerce-ca.crt"
-cockroach sql --url "postgresql://algolia:4LZTOESESjHpJTJmij-UIg@ecommerce-7ts.aws-us-east-1.cockroachlabs.cloud:26257/movr?sslmode=verify-full&sslrootcert=$HOME/Library/CockroachCloud/certs/ecommerce-ca.crt"
+API secret:
+TzWdnaNO+Ua4Qa8zD4/FmAN6ChPt70T03Y4dxtQV0JcNImhge7s+/BxLJja0gE0l
 
-FXKI5C7OD5MDX2XF
-AQkYUDGY0zc39gWPLj8NxH2pcpENFmnq5K3BTBAoAUGVbLULzqw7g/sw/ddTb3T1
+Boostrap Server:
+pkc-n00kk.us-east-1.aws.confluent.cloud:9092
 
 pkc-lzvrd.us-west4.gcp.confluent.cloud:9092
-CREATE CHANGEFEED FOR TABLE users INTO "kafka://pkc-lzvrd.us-west4.gcp.confluent.cloud:9092?tls_enabled=true&sasl_enabled=true&sasl_user=FXKI5C7OD5MDX2XF&sasl_password=AQkYUDGY0zc39gWPLj8NxH2pcpENFmnq5K3BTBAoAUGVbLULzqw7g/sw/ddTb3T1&sasl_mechanism=PLAIN" WITH updated, diff;
-CREATE CHANGEFEED FOR TABLE users INTO "kafka://pkc-lzvrd.us-west4.gcp.confluent.cloud:9092?tls_enabled=true&sasl_enabled=true&sasl_user=CDJERD6KUQXF7TVL&sasl_password=+qM7UzeVB66BORTuclLGzhLvEgkEWwQow5sZ5ZPNpSTXZYb0yyI0Z2SeZ5GS/kOk&sasl_mechanism=PLAIN" WITH updated, diff;
-CREATE CHANGEFEED FOR TABLE users INTO 'kafka://pkc-ymrq7.us-east-2.aws.confluent.cloud:9092?tls_enabled=true&sasl_enabled=true&sasl_user=J5PHIGDLW3FQTK5O&sasl_password=+8olTPmQBrzLaY5tEhBse409l7TNeg6SgnOTRbL7dJuR0seFTU40fj71m+UKj/lQ&sasl_mechanism=PLAIN' WITH updated, diff;
 
-CREATE CHANGEFEED FOR TABLE users INTO 'kafka://pkc-ymrq7.us-east-2.aws.confluent.cloud:9092?topic_name=bdtech-ecommerce-users-v1&tls_enabled=true&sasl_enabled=true&sasl_user=CL44UWCRUKFWDO4J&sasl_password=miguaM1WcmJozzJWB%2BlvamfDwqRKTFospmGcbyaZoO2rvWljkSRbUxcxOru%2FVydY&sasl_mechanism=PLAIN' WITH updated, diff;
+CREATE CHANGEFEED FOR TABLE users 
+INTO 'kafka://pkc-n00kk.us-east-1.aws.confluent.cloud:9092?topic_name=users&tls_enabled=true&sasl_enabled=true&sasl_user=6UQTPPCFNT7QL6MA&sasl_password=TzWdnaNO%2BUa4Qa8zD4%2FFmAN6ChPt70T03Y4dxtQV0JcNImhge7s%2B%2FBxLJja0gE0l&sasl_mechanism=PLAIN' 
+WITH updated, diff;
