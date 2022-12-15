@@ -37,8 +37,15 @@ SET database = movr;
 SET CLUSTER SETTING kv.rangefeed.enabled = true;
 
 CREATE CHANGEFEED FOR TABLE users 
-INTO 'kafka://pkc-n00kk.us-east-1.aws.confluent.cloud:9092?topic_name=users&tls_enabled=true&sasl_enabled=true&sasl_user=6UQTPPCFNT7QL6MA&sasl_password=TzWdnaNO%2BUa4Qa8zD4%2FFmAN6ChPt70T03Y4dxtQV0JcNImhge7s%2B%2FBxLJja0gE0l&sasl_mechanism=PLAIN' 
+INTO 'kafka://<KAFKA_BROKER>?topic_name=<KAFKA_TOPIC>&tls_enabled=true&sasl_enabled=true&sasl_user=<KAFKA_USERNAME>&sasl_password=<KAFKA_PASSWORD>&sasl_mechanism=PLAIN' 
 WITH updated, diff;
 
 UPDATE users SET address = 'new address' WHERE id = 'ae147ae1-47ae-4800-8000-000000000022';
 ```
+
+### Consumer 
+
+```bash
+node consumer.js
+```
+
