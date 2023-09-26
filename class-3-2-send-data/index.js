@@ -3,14 +3,14 @@ const _ = require('lodash')
 const algoliasearch = require("algoliasearch")
 const { Client } = require('pg')
 
-const ALGOLIA_APP_ID = process.env.ALGOLIA_APP_ID
-const ALGOLIA_APP_KEY = process.env.ALGOLIA_APP_KEY
+const REACT_APP_ALGOLIA_API_KEY = process.env.REACT_APP_ALGOLIA_API_KEY
+const REACT_APP_ALOGLIA_APP_ID = process.env.REACT_APP_ALOGLIA_APP_ID
 
 const algoliaClient = algoliasearch(
-  ALGOLIA_APP_ID,
-  ALGOLIA_APP_KEY
+    REACT_APP_ALOGLIA_APP_ID,
+    REACT_APP_ALGOLIA_API_KEY
 )
-const pgClient = new Client({ database: 'postgres' })
+const pgClient = new Client({ database: 'postgres', password: 'postgres', user: 'postgres' })
 
 const index = algoliaClient.initIndex("dev_TESTING")
 
@@ -40,4 +40,6 @@ const saveFromDBUsingChunks = async () => {
   pgClient.end()
 }
 
+//saveOne().catch(err => console.log(err))
+//saveMultiple().catch(err => console.log(err))
 saveFromDBUsingChunks().catch(err => console.log(err))

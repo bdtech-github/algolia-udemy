@@ -15,13 +15,13 @@ require("dotenv").config()
 
 
 const REACT_APP_ALGOLIA_INDEX = "products";
-const REACT_APP_ALGOLIA_API_SEARCH_KEY = process.env.REACT_APP_ALGOLIA_APP_KEY
-const REACT_APP_ALOGLIA_APP_ID = process.env.REACT_APP_ALGOLIA_APP_ID
+const REACT_APP_ALGOLIA_API_KEY = process.env.REACT_APP_ALGOLIA_API_KEY
+const REACT_APP_ALOGLIA_APP_ID = process.env.REACT_APP_ALOGLIA_APP_ID
 
 const searchClient = algoliasearch(
-  REACT_APP_ALOGLIA_APP_ID,
-  REACT_APP_ALGOLIA_API_SEARCH_KEY
-);
+    REACT_APP_ALOGLIA_APP_ID,
+    REACT_APP_ALGOLIA_API_KEY
+)
 
 export default class App extends React.Component {
   render() {

@@ -1,0 +1,4 @@
+# Setup
+
+docker compose up
+

@@ -10,10 +10,10 @@
         <div id="app"></div>
         <script>
             const app = document.getElementById('app')
-            const client = algoliasearch('04890NIZ6I', 'aeb1301a66d104859f8afb11bfd22184')
-            const index = client.initIndex('dev_EMPLOYEES')
+            const client = algoliasearch('3PCD6LMT81', '76521a517f11cc66472588d6d0e55018')
+            const index = client.initIndex('dev_TESTING')
 
-            index.search('').then(result => {                
+            index.search('fr').then(result => {
                 const hits = result.hits.map(hit => `<p>${hit._highlightResult.firstName.value.replaceAll('em', 'mark')}</p>`)
                 app.innerHTML = hits.join('')
             })

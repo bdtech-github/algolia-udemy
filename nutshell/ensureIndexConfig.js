@@ -1,13 +1,13 @@
-require("dotenv").config()
-const algoliasearch = require("algoliasearch/lite")
+require("dotenv").config();
+const algoliasearch = require("algoliasearch/lite");
 
-const INDEX_NAME = 'products'
-const ALGOLIA_APP_KEY = process.env.ALGOLIA_APP_KEY
-const ALGOLIA_APP_ID = process.env.ALGOLIA_APP_ID
+const INDEX_NAME = 'products';
+const REACT_APP_ALGOLIA_API_KEY = process.env.REACT_APP_ALGOLIA_API_KEY
+const REACT_APP_ALOGLIA_APP_ID = process.env.REACT_APP_ALOGLIA_APP_ID
 
 const client = algoliasearch(
-  ALGOLIA_APP_ID,
-  ALGOLIA_APP_KEY
+    REACT_APP_ALOGLIA_APP_ID,
+    REACT_APP_ALGOLIA_API_KEY
 )
 
 const ensureIndexConfig = async () => {
